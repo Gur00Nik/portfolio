@@ -1,30 +1,41 @@
 import styled from "styled-components";
 
-import sprite from "../icons/sprite.svg";
+import sprite from "../assets/icons/sprite.svg";
+import arrayColors from "../colors.tsx";
 
 type IconPropsType = {
   iconId: string;
   width: string;
   height: string;
   viewBox: string;
+  fill: string;
 };
 
-function Icon(props: IconPropsType) {
+export const Icon = (props: IconPropsType) => {
   return (
     <SvgLayout
       width={props.width}
       height={props.height}
       viewBox={props.viewBox}
+      fill={props.fill}
     >
-      <use xlinkHref={`${sprite}#${props.iconId}`} />
+      <SvgId xlinkHref={`${sprite}#${props.iconId}`} />
     </SvgLayout>
   );
-}
+};
 
-const SvgLayout = styled.svg.attrs(({ viewBox, width, height }) => ({
+const SvgLayout = styled.svg.attrs(({ viewBox, width, height, fill }) => ({
   viewBox: viewBox,
   width: width,
   height: height,
-}))``;
+  fill: fill,
+}))`
+  transition: 0.2s;
 
-export default Icon;
+  &:hover {
+    fill: ${arrayColors.colorPink};
+  }
+`;
+const SvgId = styled.use.attrs(({ xlinkHref }) => ({
+  xlinkHref: xlinkHref,
+}))``;

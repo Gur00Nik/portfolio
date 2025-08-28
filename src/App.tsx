@@ -1,54 +1,57 @@
-import "./App.css";
+import styled, { createGlobalStyle } from "styled-components";
 
-import styled from "styled-components";
+import arrayColors from "./colors.tsx";
 
-import Icon from "./components/Icon";
+import { VerticalMediaBlock } from "./layout/VerticalMediaBlock.tsx";
+import { Header } from "./layout/Header.tsx";
+
+import { Fragment } from "react/jsx-runtime";
 
 function App() {
   return (
-    <Layout>
-      <VerticalMediaBlock>
-        <VerticalLine />
-        <Icon
-          width={"32px"}
-          height={"32px"}
-          viewBox={"0 0 23 23"}
-          iconId={"git"}
-        ></Icon>
-        <Icon
-          width={"32px"}
-          height={"32px"}
-          viewBox={"0 0 14 20"}
-          iconId={"figma"}
-        ></Icon>
-        <Icon
-          width={"32px"}
-          height={"32px"}
-          viewBox={"0 0 23 23"}
-          iconId={"ball"}
-        ></Icon>
-      </VerticalMediaBlock>
-    </Layout>
+    <Fragment>
+      <GlobalStyle />
+      <VerticalMediaBlock />
+      <LayoutPage>
+        <Header />
+      </LayoutPage>
+    </Fragment>
   );
 }
 
-const Layout = styled.div`
+const GlobalStyle = createGlobalStyle`
+* {
+  background-color: ${arrayColors.colorBlack};
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: ${arrayColors.colorGray};
+  font-family: "Fira Code";
+}
+a {
+  text-decoration: none;
+  color: ${arrayColors.colorGray};
+}
+a:active {
+  color: ${arrayColors.colorWhite};
+}
+a:hover {
+  color: ${arrayColors.colorWhite};
+}
+h1 {
+  display: inline;
+  font-size: 32px;
+}
+h2 {
+  font-size: 24px;
+}
+h3 {
+  font-size: 16px;
+}
+`;
+
+const LayoutPage = styled.div`
   padding: 0 170px;
 `;
 
-const VerticalMediaBlock = styled.div`
-  position: absolute;
-  left: 30px;
-  top: 0px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-`;
-
-const VerticalLine = styled.div`
-  height: 200px;
-  width: 1px;
-  border: 0.5px solid var(--color--gray);
-`;
 export default App;
